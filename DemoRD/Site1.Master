@@ -1,0 +1,82 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="DemoRD.Site1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>DemoRD</title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+
+    </asp:ContentPlaceHolder>
+</head>
+
+
+
+<body>
+    <form id="form1" runat="server">
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="~/Default.aspx" class="navbar-brand" runat="server">NY Health</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <asp:LoginView ID="LoginView2" runat="server">
+                            <AnonymousTemplate>
+                                <li><a runat="server" href ="~/Info_01.aspx">About us</a></li>
+                            </AnonymousTemplate>
+
+                            <LoggedInTemplate>
+                                <li><a runat="server" href="~/user/ClaimsList.aspx">Claims</a></li>
+                                <li><a runat="server" href ="~/Info_01.aspx">About us</a></li>
+                            </LoggedInTemplate>
+
+                        </asp:LoginView>
+        
+                   </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="nav-tabs">
+                            <asp:LoginView ID="LoginView1" runat="server">
+                                <AnonymousTemplate>
+                                    <li><a runat="server" href="Register.aspx"><span class="glyphicon glyphicon-user"></span>&nbsp;Sign Up</a></li>
+                                    <li><a runat="server" href="Login.aspx"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Login</a></li>
+                                    <li></li>
+                                </AnonymousTemplate>
+                                <LoggedInTemplate>
+                                    <li><a runat="server" href="~/user/UserInfo.aspx"><span class="glyphicon glyphicon-user"></span>&nbsp;
+                                        <asp:LoginName ID="LoginName1" runat="Server"></asp:LoginName>
+                                    </a></li>
+                                    <li><a runat="server" href="~/Default.aspx?x=1"><span class="glyphicon glyphicon-log-in"></span>&nbsp; Log out</a></li>
+                                    <li></li>
+                                </LoggedInTemplate>
+                            </asp:LoginView>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+
+
+
+
+
+    <script src="Scripts/jquery-2.1.4.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+</body>
+</html>
