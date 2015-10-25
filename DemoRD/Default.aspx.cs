@@ -15,6 +15,8 @@ namespace DemoRD
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+
             String s = Request.QueryString["x"];
             if (s == "1")
             {
