@@ -15,7 +15,12 @@ namespace DemoRD
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            //Session["FirstName"] = firstName;
+
+            //if (!Page.IsPostBack)
+            //{
+                
+            //}
 
             String s = Request.QueryString["x"];
             if (s == "1")

@@ -23,7 +23,7 @@
         </ul>
 
         <p>You should sign up and log in to see all features</p>
-        <p><a class="btn btn-primary" href="Default.aspx" role="button">OK</a></p>
+        <p><a class="btn btn-success" href="user/ClaimsList.aspx" role="button">OK</a></p>
 
     </div>
 </asp:Content>

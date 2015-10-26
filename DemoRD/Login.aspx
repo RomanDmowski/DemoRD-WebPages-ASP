@@ -45,7 +45,7 @@
                 <asp:CheckBox ID="Persist" runat="server" CssClass="checkbox-inline small" Text=" Remember me" />
 
             </p>
-            <asp:Button ID="Submit1" OnClick="Logon_Click" Text="Log On" runat="server" CssClass="btn" />
+            <asp:Button ID="Submit1" OnClick="Logon_Click" Text="Log On" runat="server" CssClass="btn btn-success" />
         </div>
         <div class="panel-body">
             <asp:Label ID="Msg" ForeColor="red" runat="server" />

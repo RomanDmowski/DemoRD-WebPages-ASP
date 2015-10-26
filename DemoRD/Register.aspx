@@ -88,7 +88,7 @@
         </div>
 
         <div class="panel-body">
-            <asp:Button runat="server" ID="registryButton" OnClick="registryButton_Click" CssClass="btn" Text="Registry" />
+            <asp:Button runat="server" ID="registryButton" OnClick="registryButton_Click" CssClass="btn btn-success" Text="Registry" />
         </div>
     </div>
 
