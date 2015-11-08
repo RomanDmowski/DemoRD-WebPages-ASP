@@ -370,6 +370,48 @@ namespace DemoRD.DB
 
 
 
+        public static List<User> getListUser()
+        {
+
+            SqlConnection myConnection = null;
+
+            ConnectionStringSettings connectionSetting = getConnectionSettings("sql01");
+            string connectionStr = "Data Source = " + connectionSetting.ConnectionString;
+
+
+            User _user = new User();
+            List<User> _resultList = new List<User>();
+            DataTable userTable = new DataTable();
+
+            try
+            {
+                myConnection = new SqlConnection(connectionStr);
+                myConnection.Open();
+
+                SqlCommand cmd = new SqlCommand("getUsers", myConnection);
+                SqlDataAdapter _sqlDataAdapter = new SqlDataAdapter(cmd);
+                _sqlDataAdapter.Fill(userTable);
+
+                foreach (DataRow _dataRow in userTable.Rows)
+                {
+                    _user = convert_DataRowToUser(_dataRow);
+                    _resultList.Add(_user);
+                }
+
+                return _resultList;
+            }
+            finally
+            {
+                // close connection
+                if (myConnection != null)
+                {
+                    myConnection.Close();
+                }
+            }
+        }
+
+
+
         private static ConnectionStringSettings getConnectionSettings(string _nameConnectiongString)
         {
             // add references System.Configuration

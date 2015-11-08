@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+
+
 namespace DemoRD.user
 {
     public partial class UserInfo : System.Web.UI.Page
@@ -12,6 +14,11 @@ namespace DemoRD.user
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        protected void testButton_Click(object sender, EventArgs e)
+        {
+            var _testResult = Domain.UsersData.GetListUsers(); 
         }
     }
 }

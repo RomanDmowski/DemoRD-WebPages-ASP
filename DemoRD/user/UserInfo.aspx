@@ -14,6 +14,8 @@
         
         <div class="panel-body">
             <asp:Button runat="server" ID="userDataButton"  CssClass="btn" Text="OK" PostBackUrl="~/Default.aspx" />
+
+            <asp:Button runat="server" ID="testButton"  CssClass="btn" Text="Test" OnClick="testButton_Click" />
         </div>
     </div>
 
