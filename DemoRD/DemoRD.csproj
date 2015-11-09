@@ -75,7 +75,6 @@
     <Content Include="Login.aspx" />
     <Content Include="packages.config" />
     <Content Include="Register.aspx" />
-    <Content Include="Service1.svc" />
     <Content Include="Site1.Master" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <Content Include="user\Web.config" />
@@ -147,7 +146,6 @@
     <Compile Include="Info_01.aspx.designer.cs">
       <DependentUpon>Info_01.aspx</DependentUpon>
     </Compile>
-    <Compile Include="IService1.cs" />
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -162,9 +160,6 @@
     </Compile>
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Service1.svc.cs">
-      <DependentUpon>Service1.svc</DependentUpon>
     </Compile>
     <Compile Include="Site1.Master.cs">
       <DependentUpon>Site1.Master</DependentUpon>
