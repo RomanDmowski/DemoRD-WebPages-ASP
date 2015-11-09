@@ -83,6 +83,7 @@
     <Compile Include="ServiceClaim.cs" />
     <Compile Include="StatusClaim.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="WS_user.cs" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

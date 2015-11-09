@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-using DemoRD.DTO;
-
-namespace DemoRD.WebServices
+namespace DemoRD.DTO
 {
     public class WS_user
     {
         public Guid User_ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Login { get; set; } 
+        public string Login { get; set; }
 
-        private static WS_user convertUserToWS_user (User _user)
+        private static WS_user convertUserToWS_user(User _user)
         {
             WS_user _wsUser = new WS_user();
 
@@ -28,7 +25,7 @@ namespace DemoRD.WebServices
         }
 
 
-        public static List<WS_user> ConvertListUserToListWS_user (List<User> _listUser)
+        public static List<WS_user> ConvertListUserToListWS_user(List<User> _listUser)
         {
 
             List<WS_user> _wsList = new List<WS_user>();
@@ -42,5 +39,7 @@ namespace DemoRD.WebServices
 
 
         }
+
     }
+
 }
