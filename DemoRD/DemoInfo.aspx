@@ -3,8 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <br />
-    <br />
+    
     <div class=" col-sm-6 col-md-5  col-sm-offset-2 ">
         <h1>Welcome</h1>
 
@@ -24,7 +23,7 @@
         </ul>
         
         <p>Additionally, there is a Web-Service demo page <a href="http://demord.azurewebsites.net/DemoWSClient.html" target="_blank">http://demord.azurewebsites.net/DemoWSClient.html</a> prepared to show data exchange between server and client</p>
-
+        <p>Source code is available  at: <a href="https://github.com/RomanDmowski/DemoRD-WebPages-ASP/tree/WebServices" target="_blank">https://github.com/RomanDmowski/DemoRD-WebPages-ASP/tree/WebServices</a>	</p>
         
         
         <p>Please sign up and log in to see all features</p>

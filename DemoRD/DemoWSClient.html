@@ -87,6 +87,8 @@
 
             $('#btnGetEmployee').click(function () {
                 var empID = $('#txtID').val();
+
+
                 $.ajax({
                     //url: 'http://localhost:56601/DemoWebService1.svc/GetUserList',
                     //url: 'http://testrd02.azurewebsites.net/DemoWebService1.svc/GetUserList',
@@ -123,6 +125,11 @@
                 var _firstName = $('#txtFirstName').val();
                 var _lastName = $('#txtLastName').val();
                 var _login = $('#txtLogin').val();
+
+                if (_login === '') {
+                    //alert("no login");
+                    return;
+                }
 
                 $.ajax({
 
