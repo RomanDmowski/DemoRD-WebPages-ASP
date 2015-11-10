@@ -14,5 +14,10 @@ namespace DemoRD.Domain
         {
             return RepositoryDB.getListUser();
         }
+
+        public static bool UpdateUser(string login, string firstName, string lastName)
+        {
+            return RepositoryDB.updateUser(login, firstName, lastName);
+        }
     }
 }

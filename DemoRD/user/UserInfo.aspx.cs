@@ -16,9 +16,6 @@ namespace DemoRD.user
 
         }
 
-        protected void testButton_Click(object sender, EventArgs e)
-        {
-            var _testResult = Domain.UsersData.GetListUsers(); 
-        }
+       
     }
 }

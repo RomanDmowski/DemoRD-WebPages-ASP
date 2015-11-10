@@ -71,6 +71,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DemoInfo.aspx" />
+    <Content Include="DemoWebService1.svc" />
+    <Content Include="DemoWSClient.html" />
     <Content Include="Info_01.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="packages.config" />
@@ -78,7 +80,9 @@
     <Content Include="Site1.Master" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <Content Include="user\Web.config" />
+    <None Include="Properties\PublishProfiles\demo02.pubxml" />
     <None Include="Properties\PublishProfiles\demord.pubxml" />
+    <None Include="Properties\PublishProfiles\TestRD02.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -128,6 +132,9 @@
     </Compile>
     <Compile Include="DemoInfo.aspx.designer.cs">
       <DependentUpon>DemoInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DemoWebService1.svc.cs">
+      <DependentUpon>DemoWebService1.svc</DependentUpon>
     </Compile>
     <Compile Include="Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>

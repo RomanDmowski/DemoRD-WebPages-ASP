@@ -412,6 +412,53 @@ namespace DemoRD.DB
 
 
 
+
+
+        public static Boolean updateUser(string login, string firstName, string lastName  )
+        {
+
+            SqlConnection myConnection = null;
+
+            ConnectionStringSettings connectionSetting = getConnectionSettings("sql01");
+            string connectionStr = "Data Source = " + connectionSetting.ConnectionString;
+
+            try
+            {
+                myConnection = new SqlConnection(connectionStr);
+                myConnection.Open();
+
+
+                SqlCommand cmd = new SqlCommand("updateUser");
+
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add(new SqlParameter("@login", login));
+                cmd.Parameters.Add(new SqlParameter("@first_name", firstName));
+                cmd.Parameters.Add(new SqlParameter("@last_name", lastName));
+
+                cmd.Connection = myConnection;
+
+                int _row = cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                string res = e.Message;
+                return false;
+            }
+            finally
+            {
+                // close connection
+                if (myConnection != null)
+                {
+                    myConnection.Close();
+                }
+            }
+        }
+
+
+
         private static ConnectionStringSettings getConnectionSettings(string _nameConnectiongString)
         {
             // add references System.Configuration
