@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-using DemoRD.DB;
+using DemoRD.Entity;
 
 
 namespace DemoRD.Domain
@@ -12,7 +12,7 @@ namespace DemoRD.Domain
     {
         public static int IsLoginInDatabase(string loginToTestDomain)
         {
-            return RepositoryDB.IsLoginInDatabaseDB(loginToTestDomain);
+            return RepositoryEF.IsLoginInDatabaseEF(loginToTestDomain);
         }
 
 

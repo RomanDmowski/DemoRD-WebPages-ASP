@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 
 using DemoRD.DTO;
-using DemoRD.DB;
+using DemoRD.Entity;
 
 
 
@@ -19,7 +19,7 @@ namespace DemoRD.Domain
         {
             // XOR Claim number
 
-            List<ClaimListItem> _listClaims = RepositoryDB.GetListClaim(userNameDomain);
+            List<ClaimListItem> _listClaims = RepositoryEF.GetListClaim(userNameDomain);
 
             foreach (var item in _listClaims)
             {
@@ -36,7 +36,7 @@ namespace DemoRD.Domain
 
             long _claimNumberDecrypted =long.Parse(Crypto.DecryptXOR(_claimNumberEncryptedXOR, _userName));
 
-            ClaimListItem _claimDetail = RepositoryDB.GetClaim(_claimNumberDecrypted);
+            ClaimListItem _claimDetail = RepositoryEF.GetClaim(_claimNumberDecrypted);
 
             return _claimDetail;
 

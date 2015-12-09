@@ -5,7 +5,7 @@ using System.Web;
 
 using System.Security.Cryptography;
 using DemoRD.DTO;
-using DemoRD.DB;
+using DemoRD.Entity;
 using System.Text;
 
 
@@ -46,7 +46,7 @@ namespace DemoRD.Domain
 
             byte[] _hashedPass = EncryptPassword(login, password, _salt1, _salt2);
 
-            RepositoryDB.storePassword(firstName, lastName, login, _hashedPass, _salt1, _salt2);
+            RepositoryEF.storePassword(firstName, lastName, login, _hashedPass, _salt1, _salt2);
            
          
             return true;
@@ -55,7 +55,7 @@ namespace DemoRD.Domain
 
         public static bool VerifyPassword(string login, string password)
         {
-            User _user = RepositoryDB.getUser(login);
+            DemoRD.DTO.User _user = RepositoryEF.getUser(login);
 
             //storing user GUID for 
             userGUID = _user.User_ID;

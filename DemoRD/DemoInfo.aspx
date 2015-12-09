@@ -16,7 +16,7 @@
             </li>
             <li>C# / ASP.Net Web Forms, Bootstrap framework, CSS, HTML, JavaScript, JQuery
             </li>
-            <li>data tier - MS SQL, SQL Stored Procedures, ADO</li>
+            <li>data tier - MS SQL, Entity Framework</li>
             <li>Web-Services – WCF (Windows Communication Foundation)</li>
             <li>system components hosted in cloud - MS Azure</li>
             <li>multi-tiered software design approach</li>

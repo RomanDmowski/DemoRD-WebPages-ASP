@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="rd002Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Claim_services">
+          <Key>
+            <PropertyRef Name="index_services" />
+          </Key>
+          <Property Name="claim_number" Type="bigint" Nullable="false" />
+          <Property Name="service_details_text" Type="varchar" MaxLength="350" Nullable="false" />
+          <Property Name="date_visited" Type="date" />
+          <Property Name="amount_billed" Type="smallmoney" Nullable="false" />
+          <Property Name="plan_paid" Type="smallmoney" Nullable="false" />
+          <Property Name="plan_discount" Type="smallmoney" Nullable="false" />
+          <Property Name="patient_responsibility" Type="smallmoney" Nullable="false" />
+          <Property Name="index_services" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Claim_status">
+          <Key>
+            <PropertyRef Name="index_status" />
+          </Key>
+          <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="status_date" Type="date" />
+          <Property Name="claim_number" Type="bigint" Nullable="false" />
+          <Property Name="index_status" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Claims">
+          <Key>
+            <PropertyRef Name="claim_number" />
+          </Key>
+          <Property Name="claim_number" Type="bigint" Nullable="false" />
+          <Property Name="user_id" Type="uniqueidentifier" />
+          <Property Name="facility_id" Type="int" />
+          <Property Name="date_claim" Type="date" />
+        </EntityType>
+        <EntityType Name="Facilities">
+          <Key>
+            <PropertyRef Name="facility_id" />
+          </Key>
+          <Property Name="facility_id" Type="int" Nullable="false" />
+          <Property Name="facility_name" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="parent_user_id" Type="uniqueidentifier" />
+          <Property Name="first_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="login" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="salt1" Type="binary" MaxLength="6" />
+          <Property Name="salt2" Type="binary" MaxLength="6" />
+          <Property Name="hash" Type="binary" MaxLength="48" />
+        </EntityType>
+        <Association Name="FK_Claims_ToFacilities">
+          <End Role="Facilities" Type="Self.Facilities" Multiplicity="0..1" />
+          <End Role="Claims" Type="Self.Claims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facilities">
+              <PropertyRef Name="facility_id" />
+            </Principal>
+            <Dependent Role="Claims">
+              <PropertyRef Name="facility_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Claims_ToUsers">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Claims" Type="Self.Claims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Claims">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClServices_ToClaim">
+          <End Role="Claims" Type="Self.Claims" Multiplicity="1" />
+          <End Role="Claim_services" Type="Self.Claim_services" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Claims">
+              <PropertyRef Name="claim_number" />
+            </Principal>
+            <Dependent Role="Claim_services">
+              <PropertyRef Name="claim_number" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClStatus_ToClaim">
+          <End Role="Claims" Type="Self.Claims" Multiplicity="1" />
+          <End Role="Claim_status" Type="Self.Claim_status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Claims">
+              <PropertyRef Name="claim_number" />
+            </Principal>
+            <Dependent Role="Claim_status">
+              <PropertyRef Name="claim_number" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="rd002ModelStoreContainer">
+          <EntitySet Name="Claim_services" EntityType="Self.Claim_services" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Claim_status" EntityType="Self.Claim_status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Claims" EntityType="Self.Claims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facilities" EntityType="Self.Facilities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Claims_ToFacilities" Association="Self.FK_Claims_ToFacilities">
+            <End Role="Facilities" EntitySet="Facilities" />
+            <End Role="Claims" EntitySet="Claims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Claims_ToUsers" Association="Self.FK_Claims_ToUsers">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Claims" EntitySet="Claims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClServices_ToClaim" Association="Self.FK_ClServices_ToClaim">
+            <End Role="Claims" EntitySet="Claims" />
+            <End Role="Claim_services" EntitySet="Claim_services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClStatus_ToClaim" Association="Self.FK_ClStatus_ToClaim">
+            <End Role="Claims" EntitySet="Claims" />
+            <End Role="Claim_status" EntitySet="Claim_status" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="rd002Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="rd002Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Claim_services" EntityType="rd002Model.Claim_services" />
+          <EntitySet Name="Claim_status" EntityType="rd002Model.Claim_status" />
+          <EntitySet Name="Claims" EntityType="rd002Model.Claim" />
+          <EntitySet Name="Facilities" EntityType="rd002Model.Facility" />
+          <EntitySet Name="Users" EntityType="rd002Model.User" />
+          <AssociationSet Name="FK_ClServices_ToClaim" Association="rd002Model.FK_ClServices_ToClaim">
+            <End Role="Claim" EntitySet="Claims" />
+            <End Role="Claim_services" EntitySet="Claim_services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClStatus_ToClaim" Association="rd002Model.FK_ClStatus_ToClaim">
+            <End Role="Claim" EntitySet="Claims" />
+            <End Role="Claim_status" EntitySet="Claim_status" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Claims_ToFacilities" Association="rd002Model.FK_Claims_ToFacilities">
+            <End Role="Facility" EntitySet="Facilities" />
+            <End Role="Claim" EntitySet="Claims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Claims_ToUsers" Association="rd002Model.FK_Claims_ToUsers">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Claim" EntitySet="Claims" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Claim_services">
+          <Key>
+            <PropertyRef Name="index_services" />
+          </Key>
+          <Property Name="claim_number" Type="Int64" Nullable="false" />
+          <Property Name="service_details_text" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="date_visited" Type="DateTime" Precision="0" />
+          <Property Name="amount_billed" Type="Decimal" Nullable="false" Precision="10" Scale="4" />
+          <Property Name="plan_paid" Type="Decimal" Nullable="false" Precision="10" Scale="4" />
+          <Property Name="plan_discount" Type="Decimal" Nullable="false" Precision="10" Scale="4" />
+          <Property Name="patient_responsibility" Type="Decimal" Nullable="false" Precision="10" Scale="4" />
+          <Property Name="index_services" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Claim" Relationship="rd002Model.FK_ClServices_ToClaim" FromRole="Claim_services" ToRole="Claim" />
+        </EntityType>
+        <EntityType Name="Claim_status">
+          <Key>
+            <PropertyRef Name="index_status" />
+          </Key>
+          <Property Name="status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status_date" Type="DateTime" Precision="0" />
+          <Property Name="claim_number" Type="Int64" Nullable="false" />
+          <Property Name="index_status" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Claim" Relationship="rd002Model.FK_ClStatus_ToClaim" FromRole="Claim_status" ToRole="Claim" />
+        </EntityType>
+        <EntityType Name="Claim">
+          <Key>
+            <PropertyRef Name="claim_number" />
+          </Key>
+          <Property Name="claim_number" Type="Int64" Nullable="false" />
+          <Property Name="user_id" Type="Guid" />
+          <Property Name="facility_id" Type="Int32" />
+          <Property Name="date_claim" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Claim_services" Relationship="rd002Model.FK_ClServices_ToClaim" FromRole="Claim" ToRole="Claim_services" />
+          <NavigationProperty Name="Claim_status" Relationship="rd002Model.FK_ClStatus_ToClaim" FromRole="Claim" ToRole="Claim_status" />
+          <NavigationProperty Name="Facility" Relationship="rd002Model.FK_Claims_ToFacilities" FromRole="Claim" ToRole="Facility" />
+          <NavigationProperty Name="User" Relationship="rd002Model.FK_Claims_ToUsers" FromRole="Claim" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Facility">
+          <Key>
+            <PropertyRef Name="facility_id" />
+          </Key>
+          <Property Name="facility_id" Type="Int32" Nullable="false" />
+          <Property Name="facility_name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Claims" Relationship="rd002Model.FK_Claims_ToFacilities" FromRole="Facility" ToRole="Claim" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Guid" Nullable="false" />
+          <Property Name="parent_user_id" Type="Guid" />
+          <Property Name="first_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="login" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="salt1" Type="Binary" MaxLength="6" FixedLength="true" />
+          <Property Name="salt2" Type="Binary" MaxLength="6" FixedLength="true" />
+          <Property Name="hash" Type="Binary" MaxLength="48" FixedLength="true" />
+          <NavigationProperty Name="Claims" Relationship="rd002Model.FK_Claims_ToUsers" FromRole="User" ToRole="Claim" />
+        </EntityType>
+        <Association Name="FK_ClServices_ToClaim">
+          <End Type="rd002Model.Claim" Role="Claim" Multiplicity="1" />
+          <End Type="rd002Model.Claim_services" Role="Claim_services" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Claim">
+              <PropertyRef Name="claim_number" />
+            </Principal>
+            <Dependent Role="Claim_services">
+              <PropertyRef Name="claim_number" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClStatus_ToClaim">
+          <End Type="rd002Model.Claim" Role="Claim" Multiplicity="1" />
+          <End Type="rd002Model.Claim_status" Role="Claim_status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Claim">
+              <PropertyRef Name="claim_number" />
+            </Principal>
+            <Dependent Role="Claim_status">
+              <PropertyRef Name="claim_number" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Claims_ToFacilities">
+          <End Type="rd002Model.Facility" Role="Facility" Multiplicity="0..1" />
+          <End Type="rd002Model.Claim" Role="Claim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facility">
+              <PropertyRef Name="facility_id" />
+            </Principal>
+            <Dependent Role="Claim">
+              <PropertyRef Name="facility_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Claims_ToUsers">
+          <End Type="rd002Model.User" Role="User" Multiplicity="0..1" />
+          <End Type="rd002Model.Claim" Role="Claim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Claim">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="rd002ModelStoreContainer" CdmEntityContainer="rd002Entities">
+          <EntitySetMapping Name="Claim_services">
+            <EntityTypeMapping TypeName="rd002Model.Claim_services">
+              <MappingFragment StoreEntitySet="Claim_services">
+                <ScalarProperty Name="index_services" ColumnName="index_services" />
+                <ScalarProperty Name="patient_responsibility" ColumnName="patient_responsibility" />
+                <ScalarProperty Name="plan_discount" ColumnName="plan_discount" />
+                <ScalarProperty Name="plan_paid" ColumnName="plan_paid" />
+                <ScalarProperty Name="amount_billed" ColumnName="amount_billed" />
+                <ScalarProperty Name="date_visited" ColumnName="date_visited" />
+                <ScalarProperty Name="service_details_text" ColumnName="service_details_text" />
+                <ScalarProperty Name="claim_number" ColumnName="claim_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Claim_status">
+            <EntityTypeMapping TypeName="rd002Model.Claim_status">
+              <MappingFragment StoreEntitySet="Claim_status">
+                <ScalarProperty Name="index_status" ColumnName="index_status" />
+                <ScalarProperty Name="claim_number" ColumnName="claim_number" />
+                <ScalarProperty Name="status_date" ColumnName="status_date" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Claims">
+            <EntityTypeMapping TypeName="rd002Model.Claim">
+              <MappingFragment StoreEntitySet="Claims">
+                <ScalarProperty Name="date_claim" ColumnName="date_claim" />
+                <ScalarProperty Name="facility_id" ColumnName="facility_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="claim_number" ColumnName="claim_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facilities">
+            <EntityTypeMapping TypeName="rd002Model.Facility">
+              <MappingFragment StoreEntitySet="Facilities">
+                <ScalarProperty Name="facility_name" ColumnName="facility_name" />
+                <ScalarProperty Name="facility_id" ColumnName="facility_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="rd002Model.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="hash" ColumnName="hash" />
+                <ScalarProperty Name="salt2" ColumnName="salt2" />
+                <ScalarProperty Name="salt1" ColumnName="salt1" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="parent_user_id" ColumnName="parent_user_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
