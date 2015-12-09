@@ -12,9 +12,13 @@ The demo website has been built to comply with the following  technical requirem
 
 5. ASP.Net Web Forms classic model - Master Page, forms-based authentication, user input validation, paging, printing documents, global exception handling
 
-6. data tier - MS SQL
+6. data tier - MS SQL, Entity Framework
 
 7. version control system - Git
+
+8. JavaScript, jQuery, CSS, HTML
+
+9. Web Services , WCF
 
 
 Web site:			http://demord.azurewebsites.net/
